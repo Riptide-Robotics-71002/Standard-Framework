@@ -22,11 +22,15 @@ void on_center_button() {
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
-void initialize() {
+void initialize() {	
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
-
+	pros::lcd::set_text(1, "Hello PROS User!\nInitializing...");
 	pros::lcd::register_btn1_cb(on_center_button);
+	pros::Motor motor_right_back (10);
+	pros::Motor motor_right_front (9);
+	pros::Motor motor_left_back (8);
+	pros::Motor motor_left_front (7);
+	
 }
 
 /**

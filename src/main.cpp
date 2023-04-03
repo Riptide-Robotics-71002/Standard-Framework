@@ -23,13 +23,16 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {	
+	// Initialize LCD and connect function for center button.
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!\nInitializing...");
 	pros::lcd::register_btn1_cb(on_center_button);
+	// Constructors for the motor objects
 	pros::Motor motor_right_back (10);
 	pros::Motor motor_right_front (9);
 	pros::Motor motor_left_back (8);
 	pros::Motor motor_left_front (7);
+	// Constructors for the motor group objects
 	pros::Motor_Group motors_right ({
 		motor_right_back, 
 		motor_right_front
@@ -38,7 +41,9 @@ void initialize() {
 		motor_left_back,
 		motor_left_front
 	});
-	
+	// Constructors for controller objects
+	pros::Controller main_controller (CONTROLLER_MASTER);
+	pros::Controller extra_controller (CONTROLLER_PARTNER);
 }
 
 /**
@@ -89,17 +94,17 @@ void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	pros::Motor left_mtr(1);
 	pros::Motor right_mtr(2);
-
 	while (true) {
-		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
+		pros::lcd::print(
+			0, "%d %d %d",
+			(pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
+			(pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
+			(pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0
+		);
 		int left = master.get_analog(ANALOG_LEFT_Y);
 		int right = master.get_analog(ANALOG_RIGHT_Y);
-
 		left_mtr = left;
 		right_mtr = right;
-
 		pros::delay(20);
 	}
 }

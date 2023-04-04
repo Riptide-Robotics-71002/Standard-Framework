@@ -79,3 +79,21 @@ void opcontrol(void);
 #endif
 
 #endif  // _PROS_MAIN_H_
+
+// Constructors for the motor objects
+pros::Motor wheel_right_back (10);
+pros::Motor wheel_right_front (9);
+pros::Motor wheel_left_back (8);
+pros::Motor wheel_left_front (7);
+// Constructors for the motor group objects
+pros::Motor_Group wheels_right ({
+    wheel_right_back, 
+    wheel_right_front
+});
+pros::Motor_Group wheels_left ({
+    wheel_left_back,
+    wheel_left_front
+});
+// Constructors for controller objects
+pros::Controller controller_master (CONTROLLER_MASTER);
+pros::Controller controller_partner (CONTROLLER_PARTNER);

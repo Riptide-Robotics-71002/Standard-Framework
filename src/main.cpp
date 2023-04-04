@@ -42,8 +42,8 @@ void initialize() {
 		motor_left_front
 	});
 	// Constructors for controller objects
-	pros::Controller main_controller (CONTROLLER_MASTER);
-	pros::Controller extra_controller (CONTROLLER_PARTNER);
+	pros::Controller controller_master (CONTROLLER_MASTER);
+	pros::Controller controller_partner (CONTROLLER_PARTNER);
 }
 
 /**

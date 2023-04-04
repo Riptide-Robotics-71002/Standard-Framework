@@ -28,18 +28,18 @@ void initialize() {
 	pros::lcd::set_text(1, "Hello PROS User!\nInitializing...");
 	pros::lcd::register_btn1_cb(on_center_button);
 	// Constructors for the motor objects
-	pros::Motor motor_right_back (10);
-	pros::Motor motor_right_front (9);
-	pros::Motor motor_left_back (8);
-	pros::Motor motor_left_front (7);
+	pros::Motor wheel_right_back (10);
+	pros::Motor wheel_right_front (9);
+	pros::Motor wheel_left_back (8);
+	pros::Motor wheel_left_front (7);
 	// Constructors for the motor group objects
-	pros::Motor_Group motors_right ({
-		motor_right_back, 
-		motor_right_front
+	pros::Motor_Group wheels_right ({
+		wheel_right_back, 
+		wheel_right_front
 	});
-	pros::Motor_Group motors_left ({
-		motor_left_back,
-		motor_left_front
+	pros::Motor_Group wheels_left ({
+		wheel_left_back,
+		wheel_left_front
 	});
 	// Constructors for controller objects
 	pros::Controller controller_master (CONTROLLER_MASTER);
@@ -90,4 +90,8 @@ void autonomous() {}
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
-void opcontrol() {}
+void opcontrol() {
+	while (true) {
+		
+	}
+}

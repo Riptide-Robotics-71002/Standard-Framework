@@ -84,6 +84,7 @@ void autonomous() {
 void opcontrol() {
 	printf("Operator control mode");
 	while (true) {
-		
+		drive();
+		pros::delay(100);
 	}
 }

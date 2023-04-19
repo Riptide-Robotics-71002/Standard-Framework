@@ -53,6 +53,7 @@
          * You can add C++-only headers here
          */
         //#include <iostream>
+        #include <cmath>
     #endif
 
 #endif  // _PROS_MAIN_H_
@@ -108,27 +109,33 @@ pros::Motor_Group wheels ({
 pros::Controller controller_master (pros::E_CONTROLLER_MASTER);
 pros::Controller controller_partner (pros::E_CONTROLLER_PARTNER);
 
-int max_velocity = 100;
+int max_velocity = 200;
 
 void drive() {
     int left_sum = 
-        pros::E_CONTROLLER_ANALOG_LEFT_Y
+        controller_master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y)
         +
-        pros::E_CONTROLLER_ANALOG_LEFT_X
+        controller_master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X)
     ;
     int right_sum = 
-        pros::E_CONTROLLER_ANALOG_LEFT_Y
+        controller_master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y)
         -
-        pros::E_CONTROLLER_ANALOG_LEFT_X
+        controller_master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X)
     ;
+    int left;
+    int right;
     if (left_sum>max_velocity) {
-        int left = max_velocity;
-        int right = (left/left_sum)*right_sum;
+        left = max_velocity;
+        right = (left/left_sum)*right_sum;
     } else if (right_sum>max_velocity) {
-        int right = max_velocity;
-        int left = (right/left_sum)*right_sum;
+        left = (right/left_sum)*right_sum;
+        right = max_velocity;
     } else {
-        int left = left_sum;
-        int right = right_sum;
-    }  
+        left = left_sum;
+        right = right_sum;
+    }
+    wheels_left.move_velocity(left);
+    wheels_right.move_velocity(right);
+    printf("Left: %i, Right: %i\n", left, right);
+
 };

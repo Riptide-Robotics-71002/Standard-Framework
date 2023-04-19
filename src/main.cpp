@@ -24,9 +24,9 @@ void on_center_button() {
  */
 void initialize() {	
 	// Initialize LCD and connect function for center button.
-	printf("Initializing");
+	printf("Initializing\n");
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!\nInitializing...");
+	pros::lcd::set_text(1, "Hello PROS User!\nInitializing...\n");
 	pros::lcd::register_btn1_cb(on_center_button);
 }
 
@@ -36,7 +36,7 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
-	printf("Disabled");
+	printf("Disabled\n");
 }
 
 /**
@@ -49,7 +49,7 @@ void disabled() {
  * starts.
  */
 void competition_initialize() {
-	printf("Competition initialization");
+	printf("Competition initialization\n");
 }
 
 /**
@@ -64,7 +64,7 @@ void competition_initialize() {
  * from where it left off.
  */
 void autonomous() {
-	printf("Autonomous mode");
+	printf("Autonomous mode\n");
 	wheels_left.move_velocity(1);
 }
 
@@ -82,7 +82,7 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	printf("Operator control mode");
+	printf("Operator control mode\n");
 	while (true) {
 		drive();
 		pros::delay(100);
